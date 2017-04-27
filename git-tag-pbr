@@ -1,0 +1,22 @@
+#!/bin/sh -e
+
+if [ ! -f setup.py ]
+then
+    echo "E: Unable to find setup.py file"
+    exit 1
+fi
+
+if [ -n "$1" ]
+then
+    VERSION=$1
+else
+    VERSION=$(python setup.py --version | cut -d. -f1,2,3)
+fi
+PROJECTNAME=$(python setup.py --name)
+
+echo "I: Tagging version $VERSION"
+git tag -s $VERSION -m "$PROJECTNAME $VERSION"
+echo "I: Uploading $VERSION $PROJECTNAME, press ENTER to continue, C-c to interrupt"
+read
+git push origin $VERSION
+python setup.py sdist upload
