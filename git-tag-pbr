@@ -11,6 +11,8 @@ then
     VERSION=$1
 else
     VERSION=$(python setup.py --version | cut -d. -f1,2,3)
+    echo "I: Computed version $VERSION – presse ENTER to accept or type new version number: "
+    read VERSION
 fi
 PROJECTNAME=$(python setup.py --name)
 
