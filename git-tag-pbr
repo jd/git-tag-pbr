@@ -22,4 +22,3 @@ git tag -s $VERSION -m "$PROJECTNAME $VERSION"
 echo "I: Uploading $VERSION $PROJECTNAME, press ENTER to continue, C-c to interrupt"
 read
 git push origin $VERSION
-python setup.py sdist upload
